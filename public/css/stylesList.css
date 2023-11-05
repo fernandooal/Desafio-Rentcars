@@ -1,0 +1,94 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(45deg, #ffcc00, #000, #808080);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #ffff;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: #ffff;
+    margin-bottom: 20px; 
+}
+
+#veiculos-table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 10px; 
+    background-color: #000; 
+    border-radius: 10px;
+    overflow: visible; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; 
+    border: 2px solid #ffff; 
+}
+
+th, td {
+    border: 1px solid #ffff; 
+    padding: 8px;
+    text-align: center;
+    color: #ffff; 
+}
+
+th {
+    background-color: #000; 
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-buttons button {
+    background-color: #000; 
+    color: #ffff; 
+    padding: 6px 12px;
+    border: 2px solid #ffff; 
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px; 
+}
+
+.action-buttons button:hover {
+    background-color: #ffcc00; 
+    color: #000; 
+}
+
+.btn-back {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #ffcc00; 
+    color: #ffff; 
+    border: 2px solid #ffff; 
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px; 
+}
+
+.btn-back:hover {
+    background-color: #000; 
+    color: #ffcc00; 
+}
+
+button.back-button {
+    background-color: #000; 
+    color: #ffff; 
+    border: 2px solid #ffff; 
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 20px;
+  }
+  
+  button.back-button:hover {
+    background-color: #ffcc00; 
+    color: #000; 
+  }
+  

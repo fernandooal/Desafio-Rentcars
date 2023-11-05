@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Veículo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/stylesAddEdit.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const id = window.location.pathname.split('/').pop();
+                const response = await fetch(`/api/veiculos/${id}`);
+                const dadosVeiculo = await response.json();
+
+                const form = document.querySelector('.form');
+                form.querySelector('[name="locadora"]').value = dadosVeiculo.locadora;
+                form.querySelector('[name="modelo"]').value = dadosVeiculo.modelo;
+                form.querySelector('[name="marca"]').value = dadosVeiculo.marca;
+                form.querySelector('[name="ano"]').value = dadosVeiculo.ano;
+                form.querySelector('[name="motor"]').value = dadosVeiculo.motor;
+                form.querySelector('[name="portas"]').value = dadosVeiculo.portas;
+                form.querySelector('[name="cambio"]').value = dadosVeiculo.cambio;
+                form.querySelector('[name="ar_condicionado"]').checked = dadosVeiculo.ar_condicionado;
+            } catch (error) {
+                console.error('Erro:', error);
+                const errorMessageElement = document.getElementById('error-message');
+                errorMessageElement.textContent = 'Ocorreu um erro ao carregar os dados do veículo. Por favor, tente novamente mais tarde.';
+            }
+
+            const form = document.querySelector('.form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const locadora = document.querySelector('[name="locadora"]').value.trim();
+                const modelo = document.querySelector('[name="modelo"]').value.trim();
+                const marca = document.querySelector('[name="marca"]').value.trim();
+                const ano = document.querySelector('[name="ano"]').value.trim();
+                const motor = document.querySelector('[name="motor"]').value.trim();
+                const portas = document.querySelector('[name="portas"]').value.trim();
+                const cambio = document.querySelector('[name="cambio"]').value.trim();
+
+                const errorMessageElement = document.getElementById('error-message');
+                errorMessageElement.textContent = ''; 
+
+                if (!locadora || !modelo || !marca || !ano || !motor || !portas || !cambio) {
+                    errorMessageElement.textContent = 'Por favor, preencha todos os campos.';
+                    return;
+                }
+
+                const ar_condicionado = document.querySelector('[name="ar_condicionado"]').checked;
+
+                const data = {
+                    locadora,
+                    modelo,
+                    marca,
+                    ano,
+                    motor,
+                    portas,
+                    cambio,
+                    ar_condicionado
+                };
+
+                try {
+                    const id = window.location.pathname.split('/').pop();
+                    const response = await fetch(`/api/veiculos/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (response.ok) {
+                        const successDialog = document.getElementById('success-dialog');
+                        successDialog.showModal();
+                    } else {
+                        throw new Error('Erro ao atualizar veículo.');
+                    }
+                } catch (error) {
+                    console.error('Erro:', error);
+                    errorMessageElement.textContent = 'Ocorreu um erro ao processar sua requisição. Por favor, tente novamente mais tarde.';
+                }
+            });
+        });
+
+        function closeDialog(dialogId) {
+            const dialog = document.getElementById(dialogId);
+            dialog.close();
+            window.location.href = '/veiculos';
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Editar Veículo</h1>
+        <form class="form" action="/veiculos/edit" method="POST">
+            <div class="form-control">
+                <label for="locadora">Locadora:</label>
+                <input type="text" name="locadora" id="locadora">
+            </div>
+            <div class="form-control">
+                <label for="modelo">Modelo:</label>
+                <input type="text" name="modelo" id="modelo">
+            </div>
+            <div class="form-control">
+                <label for="marca">Marca:</label>
+                <input type="text" name="marca" id="marca">
+            </div>
+            <div class="form-control">
+                <label for="ano">Ano:</label>
+                <input type="number" name="ano" id="ano">
+            </div>
+            <div class="form-control">
+                <label for="motor">Motor:</label>
+                <input type="text" name="motor" id="motor">
+            </div>
+            <div class="form-control">
+                <label for="portas">Portas:</label>
+                <input type="number" name="portas" id="portas">
+            </div>
+            <div class="form-control">
+                <label for="cambio">Câmbio:</label>
+                <input type="text" name="cambio" id="cambio">
+            </div>
+            <div class="form-control form-checkbox">
+                <label for="ar_condicionado">Ar condicionado:</label>
+                <input type="checkbox" name="ar_condicionado" id="ar_condicionado">
+            </div>
+            <input type="submit" value="Salvar Alterações" class="button-primary">
+        </form>
+        <button onclick="window.location.href='/veiculos'" class="button-primary">Cancelar</button>
+        <div id="error-message" style="color: red; margin-top: 10px;"></div>
+    </div>
+    <dialog id="success-dialog">
+        Veículo atualizado com sucesso.
+        <button onclick="closeDialog('success-dialog')">OK</button>
+    </dialog>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Veículos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/stylesList.css">
+</head>
+<body>
+    <h1>Lista de Veículos</h1>
+    <table id="veiculos-table">
+        <thead>
+            <tr>
+                <th>Locadora</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button class="back-button" onclick="window.location.href='/'">Voltar</button>
+
+    <dialog id="details-dialog">
+        <strong class="label-left">Locadora:</strong> <span id="locadora" class="label-right"></span><br>
+        <strong class="label-left">Modelo:</strong> <span id="modelo" class="label-right"></span><br>
+        <strong class="label-left">Marca:</strong> <span id="marca" class="label-right"></span><br>
+        <strong class="label-left">Ano:</strong> <span id="ano" class="label-right"></span><br>
+        <strong class="label-left">Motor:</strong> <span id="motor" class="label-right"></span><br>
+        <strong class="label-left">Portas:</strong> <span id="portas" class="label-right"></span><br>
+        <strong class="label-left">Câmbio:</strong> <span id="cambio" class="label-right"></span><br>
+        <strong class="label-left">Ar condicionado:</strong> <span id="ar_condicionado" class="label-right"></span><br>
+        <button onclick="closeDialog('details-dialog')" class="button-primary">OK</button>
+    </dialog>
+
+    <dialog id="delete-dialog">
+        Tem certeza que deseja excluir este veículo?
+        <button onclick="deleteVehicle()">Sim</button>
+        <button onclick="closeDialog('delete-dialog')">Cancelar</button>
+    </dialog>
+
+    <dialog id="success-dialog">
+        Veículo excluído com sucesso.
+        <button onclick="closeDialog('success-dialog')">OK</button>
+    </dialog>
+
+    <script>
+        function confirmDeleteVehicle() {
+            const dialog = document.getElementById('delete-dialog');
+            dialog.close();
+            window.location.href = '/veiculos'; 
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/veiculos');
+                const data = await response.json();
+                
+                const veiculosTable = document.getElementById('veiculos-table').querySelector('tbody');
+                data.forEach(veiculo => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${veiculo.locadora}</td>
+                        <td>${veiculo.modelo}</td>
+                        <td>${veiculo.marca}</td>
+                        <td class="action-buttons">
+                            <button onclick="viewDetails('${veiculo.id}')">Detalhes</button>
+                            <button onclick="editVehicle('${veiculo.id}')">Editar</button>
+                            <button onclick="openDeleteDialog('${veiculo.id}')">Excluir</button>
+                        </td>
+                    `;
+                    veiculosTable.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao buscar a lista de veículos. Por favor, tente novamente mais tarde.\n\nDetalhes do erro: ' + error.message);
+            }
+        });
+
+        async function viewDetails(id) {
+            try {
+                const response = await fetch(`/api/veiculos/${id}`);
+                const data = await response.json();
+
+                const locadora = document.getElementById('locadora');
+                locadora.textContent = data.locadora;
+
+                const modelo = document.getElementById('modelo');
+                modelo.textContent = data.modelo;
+
+                const marca = document.getElementById('marca');
+                marca.textContent = data.marca;
+
+                const ano = document.getElementById('ano');
+                ano.textContent = data.ano;
+
+                const motor = document.getElementById('motor');
+                motor.textContent = data.motor;
+
+                const portas = document.getElementById('portas');
+                portas.textContent = data.portas;
+
+                const cambio = document.getElementById('cambio');
+                cambio.textContent = data.cambio;
+
+                const ar_condicionado = document.getElementById('ar_condicionado');
+                ar_condicionado.textContent = data.ar_condicionado ? 'Sim' : 'Não';
+
+                const dialog = document.getElementById('details-dialog');
+                dialog.showModal();
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao buscar os detalhes do veículo. Por favor, tente novamente mais tarde.\n\nDetalhes do erro: ' + error.message);
+            }
+        }
+
+        function closeDialog(dialogId) {
+            const dialog = document.getElementById(dialogId);
+            dialog.close();
+
+            if (dialogId === 'success-dialog') {
+                window.location.reload(); 
+            }
+        }
+
+        async function editVehicle(id) {
+           window.location.href = `/veiculos/edit/${id}`;
+        }
+
+        function openDeleteDialog(id) {
+            const dialog = document.getElementById('delete-dialog');
+            dialog.showModal();
+            const deleteButton = dialog.querySelector('button');
+            deleteButton.onclick = function() {
+                deleteVehicle(id);
+            }
+        }
+
+        async function deleteVehicle(id) {
+            try {
+                const response = await fetch(`/api/veiculos/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    const successDialog = document.getElementById('success-dialog');
+                    successDialog.showModal();
+                    closeDialog('delete-dialog'); 
+                } else {
+                    throw new Error('Erro ao excluir veículo.');
+                }
+
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro ao excluir o veículo. Por favor, tente novamente mais tarde.\n\nDetalhes do erro: ' + error.message);
+            }
+        }
+
+    </script>
+</body>
+</html>

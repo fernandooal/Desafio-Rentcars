@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicione um veículo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/stylesAddEdit.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Adicione um Veículo</h1>
+        <form class="form" action="/veiculos/create" method="POST" id="veiculo-form">
+            <div class="form-control">
+                <label for="locadora">Locadora:</label>
+                <input type="text" name="locadora" id="locadora">
+            </div>
+            <div class="form-control">
+                <label for="modelo">Modelo:</label>
+                <input type="text" name="modelo" id="modelo">
+            </div>
+            <div class="form-control">
+                <label for="marca">Marca:</label>
+                <input type="text" name="marca" id="marca">
+            </div>
+            <div class="form-control">
+                <label for="ano">Ano:</label>
+                <input type="number" name="ano" id="ano">
+            </div>
+            <div class="form-control">
+                <label for="motor">Motor:</label>
+                <input type="text" name="motor" id="motor">
+            </div>
+            <div class="form-control">
+                <label for="portas">Portas:</label>
+                <input type="number" name="portas" id="portas">
+            </div>
+            <div class="form-control">
+                <label for="cambio">Câmbio:</label>
+                <input type="text" name="cambio" id="cambio">
+            </div>
+            <div class="form-control form-checkbox">
+                <label for="ar_condicionado">Ar condicionado:</label>
+                <input type="checkbox" name="ar_condicionado" id="ar_condicionado">
+            </div>
+            <input type="submit" value="Cadastrar">
+        </form>
+        <button onclick="window.location.href='/'" class="button-primary">Voltar</button>
+        <div id="error-message" style="color: red; margin-top: 10px;"></div>
+        <div id="success-message" style="color: green; margin-top: 10px;"></div>
+        <dialog id="success-dialog">
+            <p>Veículo cadastrado com sucesso.</p>
+            <button onclick="closeSuccessDialog()">OK</button>
+        </dialog>
+    </div>
+
+    <script>
+        function closeSuccessDialog() {
+            document.getElementById('success-dialog').close();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('.form');
+            const errorMessageElement = document.getElementById('error-message');
+            const successMessageElement = document.getElementById('success-message');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const locadora = document.querySelector('[name="locadora"]').value;
+                const modelo = document.querySelector('[name="modelo"]').value;
+                const marca = document.querySelector('[name="marca"]').value;
+                const ano = document.querySelector('[name="ano"]').value;
+                const motor = document.querySelector('[name="motor"]').value;
+                const portas = document.querySelector('[name="portas"]').value;
+                const cambio = document.querySelector('[name="cambio"]').value;
+
+                if (!locadora.trim() || !modelo.trim() || !marca.trim() || !ano.trim() || !motor.trim() || !portas.trim() || !cambio.trim()) {
+                    errorMessageElement.textContent = 'Por favor, preencha todos os campos.';
+                    successMessageElement.textContent = '';
+                    return;
+                }
+
+                const ar_condicionado = document.querySelector('[name="ar_condicionado"]').checked ? 'on' : 'off';
+
+                const data = {
+                    locadora,
+                    modelo,
+                    marca,
+                    ano,
+                    motor,
+                    portas,
+                    cambio,
+                    ar_condicionado
+                };
+
+                try {
+                    const response = await fetch('/veiculos/create', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Erro ao cadastrar veículo');
+                    }
+
+                    const successDialog = document.getElementById('success-dialog');
+                    successDialog.showModal();
+
+                    document.getElementById('veiculo-form').reset();
+                } catch (error) {
+                    console.error('Erro:', error);
+                    errorMessageElement.textContent = 'Ocorreu um erro ao processar sua requisição. Por favor, tente novamente mais tarde.';
+                    successMessageElement.textContent = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
