@@ -1,6 +1,7 @@
 # Desafio Rentcars
 
 Desafio proposto pela empresa Rentcars para uma vaga de estágio.
+
 O projeto consiste em um aplicativo CRUD (Create, Read, Update, Delete) desenvolvido em Node.js, que permitirá a gestão de veículos em uma locadora de carros. Cada veículo terá informações detalhadas, incluindo ID, locadora, modelo, marca, ano, motor, número de portas, tipo de câmbio, presença de ar-condicionado e datas de criação e atualização.
 
 ### 🔧 Instalação
@@ -55,12 +56,17 @@ localhost:3000
 ```
 para poder utilizar o aplicativo CRUD de gestão de veículos desenvolvido para concorrer à vaga de estágio da Rentcars!
 
+
 ## 🛠️ Construído com
 
 [HTML](https://html.com), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) e [JavaScript](https://www.javascript.com) - Desenvolvimento da Front-End;
+
 [Node.js](https://nodejs.org/en) - Linguagem escolhida pela empresa para o Back-End;
+
 [Express.js](https://expressjs.com) - Framework utilizado para o projeto;
+
 [Sequelize](https://sequelize.org) - ORM utilizada para fazer a interface com o banco de dados;
+
 [MySQL](https://www.mysql.com) e [Docker](https://hub.docker.com) - Criação de containers a partir do MySQL através do Docker.
 
 
