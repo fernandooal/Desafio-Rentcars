@@ -4,7 +4,7 @@ Desafio proposto pela empresa Rentcars para uma vaga de estágio.
 
 O projeto consiste em um aplicativo CRUD (Create, Read, Update, Delete) desenvolvido em Node.js, que permitirá a gestão de veículos em uma locadora de carros. Cada veículo terá informações detalhadas, incluindo ID, locadora, modelo, marca, ano, motor, número de portas, tipo de câmbio, presença de ar-condicionado e datas de criação e atualização.
 
-### 🔧 Instalação
+## 🔧 Instalação
 
 O primeiro passo para a utilização desse código é copiar esse repositório para alguma pasta. Depois disso, é necessário abrir um terminal e executar os seguintes comandos para a criação do banco de dados pelo Docker:
 
@@ -38,6 +38,32 @@ e, no navegador, acessar a url
 localhost:3000
 ```
 para poder utilizar o aplicativo CRUD de gestão de veículos desenvolvido para concorrer à vaga de estágio da Rentcars!
+
+## 📚 Como funciona
+
+### 💻 Servidor (Node.js e Express)
+O código usa Node.js e Express para criar um servidor web.
+
+Rotas são definidas para lidar com diferentes tipos de requisições, como criação, leitura, atualização e exclusão de veículos.
+
+O servidor se comunica com o banco de dados para executar operações como salvar, buscar e modificar informações de veículos.
+
+### 🧩 Páginas HTML
+Existem várias páginas HTML no diretório "views" que são servidas para o navegador.
+
+Essas páginas contêm formulários e elementos de interface para interagir com a aplicação.
+
+### 👨‍💻 Interatividade com JavaScript
+JavaScript é usado nas páginas HTML para adicionar funcionalidades interativas.
+
+Por exemplo, ao adicionar um veículo, os dados do formulário são coletados, validados e enviados para o servidor usando JavaScript.
+
+Respostas do servidor são tratadas, e mensagens de sucesso ou erro são exibidas no navegador.
+
+### 📡 Conexão com o Banco de Dados
+O código estabelece uma conexão com um banco de dados.
+
+Isso permite salvar e recuperar informações sobre veículos.
 
 
 ## 🛠️ Construído com
