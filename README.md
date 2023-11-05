@@ -11,7 +11,7 @@ O primeiro passo para a utilização desse código é copiar esse repositório p
 mkdir /tmp/mysql-data
 docker run --name basic-mysql --rm -v /tmp/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=ANSKk08aPEDbFjDO -e MYSQL_DATABASE=testing -p 3307:3306 -it mysql:8.0
 ```
-Feito isso, é preciso acessar a pasta em que você salvou esse projeto pelo terminal e executar os seguintes comandos:
+Feito isso, acessea pasta em que você salvou esse projeto pelo terminal e executar os seguintes comandos:
 
 ```
 npm init -y
