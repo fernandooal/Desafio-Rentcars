@@ -61,10 +61,7 @@ Por exemplo, ao adicionar um veículo, os dados do formulário são coletados, v
 Respostas do servidor são tratadas, e mensagens de sucesso ou erro são exibidas no navegador.
 
 ### 📡 Conexão com o Banco de Dados
-O código estabelece uma conexão com um banco de dados.
-
-Isso permite salvar e recuperar informações sobre veículos.
-
+O código estabelece uma conexão com um banco de dados, que permite salvar e recuperar informações sobre veículos.
 
 ## 🛠️ Construído com
 
