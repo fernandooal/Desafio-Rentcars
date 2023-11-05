@@ -69,4 +69,13 @@ para poder utilizar o aplicativo CRUD de gestão de veículos desenvolvido para 
 
 [MySQL](https://www.mysql.com) e [Docker](https://hub.docker.com) - Criação de containers a partir do MySQL através do Docker.
 
+## ❤️ Agradecimentos
 
+Agradeço a empresa e a equipe da Rentcars pela oportunidade! 
+
+Independente do resultado, foi uma experiência única. Através desse projeto, consegui expandir meus conhecimentos e dar mais um passo na sonhada carreira de desenvolvedor,
+tendo em vista que só possuia conhecimentos em Java.
+
+Agradeço novamente pela consideração e pela oportunidade de participar do processo seletivo. Fico à disposição para qualquer eventualidade e espero que possamos nos encontrar novamente no futuro. Desejo muito sucesso à equipe da Rentcars e que continuem prosperando no mercado. 
+
+Atenciosamente, Fernando Alonso.
