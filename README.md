@@ -63,7 +63,7 @@ Respostas do servidor são tratadas, e mensagens de sucesso ou erro são exibida
 ### 📡 Conexão com o Banco de Dados
 O código estabelece uma conexão com um banco de dados, que permite salvar e recuperar informações sobre veículos.
 
-## 🛠️ Construído com
+## 🛠️ Tecnologias utilizadas
 
 [HTML](https://html.com), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) e [JavaScript](https://www.javascript.com) - Desenvolvimento da Front-End;
 
