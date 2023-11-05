@@ -29,11 +29,11 @@ npm install --save-dev nodemon
 ```
 Instala o nodemon, uma biblioteca que torna possível fazer alterações sem precisar encerrar e iniciar a API toda vez. Por ser uma utilidade apenas para o dev, foi adicionado no seu comando de instalação o --save -dev.
 
-Agora, basta digitar no terminal o comando
+Agora, basta digitar no terminal o comando:
 ```
 npm start
 ```
-e, no navegador, acessar a url
+e, no navegador, acessar a url:
 ```
 localhost:3000
 ```
