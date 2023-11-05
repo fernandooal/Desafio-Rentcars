@@ -12,12 +12,7 @@ O primeiro passo para a utilização desse código é copiar esse repositório p
 mkdir /tmp/mysql-data
 docker run --name basic-mysql --rm -v /tmp/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=ANSKk08aPEDbFjDO -e MYSQL_DATABASE=testing -p 3307:3306 -it mysql:8.0
 ```
-Feito isso, acesse a pasta em que você salvou esse projeto pelo terminal e execute os seguintes comandos:
-
-```
-npm init -y
-```
-Inicia o npm, possibilitando a instalação de módulos externos;
+Feito isso, instale os módulos externos necessários através dos seguintes comandos: 
 
 ```
 npm install express
@@ -34,19 +29,7 @@ npm install --save-dev nodemon
 ```
 Instala o nodemon, uma biblioteca que torna possível fazer alterações sem precisar encerrar e iniciar a API toda vez. Por ser uma utilidade apenas para o dev, foi adicionado no seu comando de instalação o --save -dev.
 
-Por último, para concluir a parte de configuração, resta apenas modificar o conteúdo do package.json que foi criado, adicionando a seguinte estrutura na parte de scripts:
-
-```
-...
-"scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js index.js "
-},
-"dependencies": {
-"express": "^4.18.2",
-...
-```
-
-Feito isso, basta digitar no terminal o comando
+Agora, basta digitar no terminal o comando
 ```
 npm start
 ```
